@@ -1,7 +1,6 @@
-import math
 import time
-
 import math
+
 class Solution(object):
     def maxArea(self, height: list[int]) -> int:
         if(len(height) < 2 or height is None):
@@ -18,13 +17,19 @@ class Solution(object):
             middle_index = 3
         if(len(height) == 2 ):
             middle_index = 2
-        
+       
+        print(heights_index_tuple_list)
+        count = 0
+        area_updated_count = 0
         for x in range(0,middle_index ,1):
-            for y in range(x):
+            for y in range (x):
+                count = count + 1 
                 area = heights_index_tuple_list[x][1] * abs(heights_index_tuple_list[x][0] - heights_index_tuple_list[y][0])
+                print(f"x: {x}, y: {y}, ({heights_index_tuple_list[x][1]} * ({heights_index_tuple_list[x][0]}  - {heights_index_tuple_list[y][0]})) = area : {area}")
                 if area > max_area:
+                    area_updated_count = area_updated_count + 1
                     max_area = area
-        return(max_area)
+        return(max_area,count,area_updated_count)
     
 if __name__ == "__main__":
     solution =  Solution()
@@ -41,4 +46,4 @@ if __name__ == "__main__":
 
     print(f"list size : {len(height_test_2)} solution : {solution.maxArea(height_test_2)} run time {time.time() - start} seconds")
     
-    print(f"list size : {len(height)} solution : {solution.maxArea(height)} run time {time.time() - start} seconds")
+    #print(f"list size : {len(height)} solution : {solution.maxArea(height)} run time {time.time() - start} seconds")
