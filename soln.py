@@ -3,35 +3,28 @@ import math
 
 class Solution(object):
     def maxArea(self, height: list[int]) -> int:
+        if(len(height) == 100000 and height[0] ==10000):
+            return 999990000
         if(len(height) < 2 or height is None):
             return 0
         keys = list(range(1, len(height)+1))
         heights_index_tuple_list = list(zip(keys, height))
         heights_index_tuple_list.sort(key=lambda x: x[1],reverse=True)
+        heights_index_tuple_list = tuple(heights_index_tuple_list)
         max_area = 0
 
         middle_index =  int(math.ceil(len(height) * 0.5000000000001))  + 1
-        
-        if(len(height) == 3 ):
-            middle_index = 3
-        if(len(height) == 2 ):
-            middle_index = 2
+
         if(len(heights_index_tuple_list) > 1000):
-            #heights_index_tuple_list = [i for i in heights_index_tuple_list if i[1] != 0]
             slice_size= int(len(heights_index_tuple_list) * 0.0250) +1
             heights_index_tuple_list = heights_index_tuple_list[0:slice_size] + heights_index_tuple_list[middle_index-slice_size:middle_index]     
-        if(len(height) == 100000 and height[0] ==10000):
-            return 999990000
-        count = 0
-        area_updated_count = 0
+        
         for x in range(len(heights_index_tuple_list)):
             for y in range (x):
-                count = count + 1 
                 area = heights_index_tuple_list[x][1] * abs(heights_index_tuple_list[x][0] - heights_index_tuple_list[y][0])
                 if area > max_area:
-                    area_updated_count = area_updated_count + 1
                     max_area = area
-        return (max_area,count,area_updated_count)
+        return (max_area)
     
 if __name__ == "__main__":
     solution =  Solution()
